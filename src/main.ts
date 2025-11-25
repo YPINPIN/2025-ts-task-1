@@ -71,7 +71,7 @@ export const fiddleLeafFig: PlantItem = {
 // 目標：以 type 定義函式型別並實作。
 export type CartItem = { price: number; qty: number };
 export type Coupon = { type: 'percent' | 'cash'; amount: number };
-export type CalcTotalFn = (items: CartItem[], coupon: Coupon) => number;
+export type CalcTotalFn = (items: CartItem[], coupon?: Coupon) => number;
 
 export const calcTotal: CalcTotalFn = (items, coupon) => {
   const subtotal = items.reduce((sum, it) => sum + it.price * it.qty, 0);
