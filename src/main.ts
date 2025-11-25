@@ -154,7 +154,7 @@ export const publicPlant: PublicPlant = { id: 101, name: '琴葉榕', price: 250
     - imageUrl: 字串
     - imagesUrl: 字串陣列（非必要）
 */
-type TProduct = {
+export type TProduct = {
   id: string;
   title: string;
   category: string;
@@ -171,13 +171,13 @@ type TProduct = {
 2️⃣ 定義 type CreateProduct
 由 Product 衍生，但不包含 id（使用 Omit）
 */
-type TCreateProduct = Omit<TProduct, 'id'>;
+export type TCreateProduct = Omit<TProduct, 'id'>;
 
 /*
 3️⃣ 定義 type UpdateProduct
 由 Product 衍生，id, title 必須有，其餘皆可選（使用 Partial 與 Omit）
 */
-type TUpdateProduct = Pick<TProduct, 'id' | 'title'> & Partial<Omit<TProduct, 'id' | 'title'>>;
+export type TUpdateProduct = Pick<TProduct, 'id' | 'title'> & Partial<Omit<TProduct, 'id' | 'title'>>;
 
 /*
 4️⃣ 實作函式 submitProduct(type, product)
@@ -189,13 +189,12 @@ type TUpdateProduct = Pick<TProduct, 'id' | 'title'> & Partial<Omit<TProduct, 'i
 create → "新增商品成功：${product.title}"
 update → "更新商品成功：${product.id}"
 */
-type TSubmitFn = (type: 'create' | 'update', product: TCreateProduct | TUpdateProduct) => string;
+export type TSubmitFn = (type: 'create' | 'update', product: TCreateProduct | TUpdateProduct) => string;
 
-const submitProduct: TSubmitFn = (type, product) => {
+export const submitProduct: TSubmitFn = (type, product) => {
   if (type === 'create') {
     return `新增商品成功：${(product as TCreateProduct).title}`;
-  } else if (type === 'update') {
+  } else {
     return `更新商品成功：${(product as TUpdateProduct).id}`;
   }
-  return '商品資料錯誤';
 };
